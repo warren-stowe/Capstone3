@@ -1,0 +1,96 @@
+﻿@model IList<ParkModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+
+    body {
+        background: -webkit-linear-gradient(top, #75b4f4 0%,#c7edf6 50%);
+    }
+
+    .image {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        height: 100%;
+        margin-bottom: 1.2em;
+        background: -webkit-linear-gradient(left, #75b4f4 0%,#c7edf6 100%);
+        transition: all .8s ease-in-out;
+    }
+
+    .park-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .park {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        margin: auto;
+        border: 2px solid black;
+        background: -webkit-linear-gradient(right, #75b4f4 0%,#c7edf6 50%);
+    }
+
+    .image:hover {
+        position: relative;
+        top: -15px;
+        /*left: 10em;*/
+        right: 8em;
+        /*bottom: -20px;*/
+        width: 130%;
+        height: auto;
+        display: block;
+        z-index: 999;
+        transform: scale(1.1);
+    }
+
+    .park-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: auto;
+        padding-left: 1.5em;
+    }
+
+    .location {
+        display: inline;
+        font-size: 1.8em;
+        color: black;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        color: black;
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        text-align: center;
+        font-family: 'ZCOOL XiaoWei', serif;
+    }
+</style>
+
+<h2> List of Parks </h2>
+
+<div class="park-list" id="x1">
+    @{
+        foreach (var park in Model)
+        {
+            <div class="park">
+                <a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@park.ParkCode">
+                <img class="image" src="~/images/parks/@park.Path" alt="@park.ParkName" /> 
+                </a>
+                <div class="park-info">
+                    <a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@park.ParkCode">
+                        <span class="location"> @park.ParkName, @park.State</span>
+                    </a>
+                        <span class="description">@park.Description</span>
+                </div>
+            </div>
+        }
+    }
+</div>

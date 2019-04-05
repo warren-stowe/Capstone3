@@ -1,0 +1,157 @@
+﻿@model SurveyModel
+@{
+    ViewData["Title"] = "Survey";
+}
+
+<style>
+
+    * {
+        font-size: 1.06em;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .body-content {
+        background: -webkit-linear-gradient(top, #75b4f4 0%,#c7edf6 50%);
+    }
+
+    .main-body {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid black;
+        padding: 18px 4px 13px 10px;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow: inset 0 0 12px #000000;
+    }
+
+    .sub-bodies {
+        width: 100%;
+        height: auto;
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    #email {
+        background-blend-mode: multiply;
+        width: auto;
+        height: 40px;
+        padding-left: 12px;
+        margin-left: 15px;
+    }
+
+    /*#selection {
+        background-blend-mode: multiply;
+        padding-left: 13px;
+    }*/
+
+    #park-selection {
+        background-blend-mode: multiply;
+        padding-left: 13px;
+        height: 40px;
+        width: auto;
+        margin-left: 15px;
+    }
+
+    #state-selection {
+        background-blend-mode: multiply;
+        padding-left: 13px;
+        height: 40px;
+        width: auto;
+        margin-left: 15px;
+    }
+
+    #activity-selection {
+        background-blend-mode: multiply;
+        padding-left: 13px;
+        height: 40px;
+        width: auto;
+        margin-left: 15px;
+    }
+
+    div p {
+        width: 28%;
+        font-size: 1.4em;
+        font-family: 'Lora', serif;
+        justify-content: center;
+        margin-left: 15px;
+    }
+
+    /*.button {
+
+    }*/
+
+    .submit-button {
+        /* Full width border and a clip-path visually cutting it down to the starting size */
+        border: solid 10px #f7dfc1;
+        border-radius: 10px;
+        clip-path: polygon( calc(0% + 5px) calc(0% + 5px), /* top left */
+        calc(100% - 5px) calc(0% + 5px), /* top right */
+        calc(100% - 5px) calc(100% - 5px), /* bottom right */
+        calc(0% + 5px) calc(100% - 5px) /* bottom left */
+        );
+        transition: clip-path 0.4s linear;
+        width: 10%;
+        text-align: center;
+        list-style: none;
+        line-height: 40px;
+        width: 20%;
+        /*border-radius: 5px;*/
+        font-size: 1.4em;
+        background: radial-gradient(#fdb459, #f7dfc1);
+    }
+
+        .submit-button:hover {
+            /* Clip-path spanning the entire box so it's no longer hiding the full-width border. */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+    h2 {
+        font-family: 'PT Serif', serif;
+        font-size: 2.1em;
+        margin-top: 15px;
+        margin-bottom: 23px;
+    }
+
+</style>
+
+<h2>Welcome to the National Park Geek Daily Survey!</h2>
+
+<div class="main-body">
+
+        <form asp-controller="survey" asp-action="NewSurvey" method="post">
+            <div class="sub-bodies">
+                <label for="selection"></label>
+                <p>Choose a Park: </p>
+                <select asp-for="ParkCode" asp-items="Model.AllParks.Values" id="park-selection"></select>
+                <span asp-validation-for="ParkCode"></span>
+            </div>
+            <div class="sub-bodies">
+                <p>Enter your Email Address: </p>
+                <label for="email"></label>
+                <input type="text" asp-for="Email" id="email" placeholder="Enter your email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="sub-bodies">
+                <p>State of Residence: </p>
+                <label for="selection"></label>
+                <select asp-for="State" asp-items="SurveyModel.States" id="state-selection"></select>
+                <span asp-validation-for="State"></span>
+            </div>
+            <div class="sub-bodies">
+                <p>Enter your activity level: </p>
+                <label for="selection"></label>
+                <select asp-for="ActivityLevel" asp-items="SurveyModel.ActivityLevels" id="activity-selection"></select>
+                <span asp-validation-for="ActivityLevel"></span>
+            </div>
+            <div class="border-button">
+                <input class="submit-button" type="submit" value="submit" />
+            </div>
+        </form>
+</div>

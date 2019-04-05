@@ -1,0 +1,113 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 150px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.field-validation-error {
+    color: #ED4337;
+    font-weight: bold;
+}
+
+.navbar navbar-inverse navbar-fixed-top {
+    display: flex;
+}
+
+.nav navbar-nav {
+    padding-top: 50px;
+}
+
+.toBottom {
+    display: flex;
+    font-size: 1.3em;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: baseline;
+    height: 150px;
+}
+
+.navbar-brand img {
+    height: 100%;   
+}
+
+.tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    align-content: center;
+    justify-content: space-around;
+    background-color: #FFF;
+    box-shadow: 10px 5px 10px 5px #808080;
+}
+
+.tile-weather {
+    flex: 1 25%;
+    text-align: center;
+}
+
+.tile-weather-ul {
+    list-style-type: none;
+}
+
+.tile-weather-small {
+    flex: 1 15%;
+}
+
+.tile-weather-small-ul {
+    list-style-type: none;
+}
+
+.tile-image img {
+    width: 100%;
+}
+
+.tile-image-small img {
+    width: 100%;
+}
+
+.tile-info {
+    list-style-type: none;
+}
+
+.weather-title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}

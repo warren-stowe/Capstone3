@@ -1,0 +1,76 @@
+﻿@model IList<SurveyResultsModel>
+@{
+    ViewData["Title"] = "SurveyResults";
+}
+
+<style>
+
+    .main-container {
+        display: flex;
+        width: 100%;
+        height: auto;
+        border-bottom: 2px solid black;
+    }
+
+    .sub-container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        width: 30%;
+        height: auto;
+    }
+
+    a {
+        width: 20%;
+        height: auto;
+    }
+
+    .survey-img {
+        width: 90%;
+        height: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        display: block;
+
+    }
+
+    p {
+        width: 30%;
+        height: auto;
+        margin: auto;
+        text-align: center;
+    }
+
+    .park-name {
+        width: 30%;
+        height: auto;
+        margin: auto;
+        text-align: center;
+        color: darkslategray;
+        font-size: 24px;
+    }
+
+</style>
+
+<h2>Daily Survey Results</h2>
+
+<h2>Thank you for participating in our survey.  The most popular parks are listed below:</h2>
+
+<div>
+    @foreach (SurveyResultsModel survey in Model)
+    {
+        <div class="main-container">
+            <a asp-controller="home" asp-action="detail" asp-route-parkCode="@survey.ParkCode" method="post">
+                <img class="survey-img" src="~/images/parks/@survey.ImagePath" />
+            </a>
+            <p class="park-name">@survey.ParkName</p>
+            <div class="sub-container">
+                <p><strong>Total Votes:  @survey.ParkVotes</strong></p>
+            </div>
+        </div>
+    }
+
+
+</div>

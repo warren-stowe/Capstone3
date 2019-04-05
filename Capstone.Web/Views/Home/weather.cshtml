@@ -1,0 +1,39 @@
+﻿@model IList<WeatherModel>
+@{
+    ViewData["Title"] = "Weather";
+}
+
+<h2>Weather Forecast</h2>
+
+<div class="weather-container">
+    <div class="weather-week">
+        @{ foreach (var item in Model)
+            {
+                if (item.FiveDayForecastValue == 1)
+                {
+                    <div class="weather-today">
+                        <div class="weather-today-image">
+                            <img src="~/images/weather/@item.ImageName" />
+                        </div>
+                        <div class="weather-today-info">
+                            <ul class="weather-today-extremes">
+                                <li>High @item.HighTemp</li>
+                                <li>Low @item.LowTemp</li>
+                            </ul>
+                            <p class="weather-today-details">@WeatherMessages.GetWeatherMessage(item.Forecast, item.HighTemp, item.LowTemp)</p>
+                        </div>
+                    </div>
+                }
+                <div class="weather-week-day">
+                    <img class="weather-week-image" src="~/images/weather/@item.ImageName" />
+                    <ul class="weather-week-extremes">
+                        <li>High @item.HighTemp</li>
+                        <li>Low @item.HighTemp</li>
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+

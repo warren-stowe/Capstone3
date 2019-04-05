@@ -1,0 +1,232 @@
+﻿@model ParkModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<style>
+
+    * {
+        font-size: 1.1em;
+    }
+
+    body {
+        background: -webkit-linear-gradient(top, #75b4f4 0%,#c7edf6 50%);
+    }
+
+    .image {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 70%;
+        box-shadow: 15px 15px 30px #808080;
+    }
+
+    .name {
+        margin-top: 20px;
+        font-family: 'Reem Kufi';
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .founded {
+        font-family: 'Raleway', sans-serif;
+        font-size: 1.4em;
+        margin-top: 1.1em;
+        margin-bottom: 1.1em;
+    }
+
+    .quote {
+        margin-top: 1.1em;
+        margin-bottom: 1.1em;
+        font-family: 'Srisakdi', cursive;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    .description {
+        margin-top: 1.4em;
+        margin-bottom: 1em;
+    }
+
+    .more-info {
+        padding-top: -1em;
+    }
+
+    .details li {
+        list-style-type: square;
+        margin: 0;
+        padding: 0;
+    }
+
+    /*.facts-headline-wrap {
+        background: linear-gradient(to left, purple 0%,red 50%);
+        padding: 3px;
+    }*/
+
+    .facts-headline h2 {
+        font-size: 1.2em;
+        position: relative;
+        text-align: center;
+        line-height: 1em;
+        width: 18%;
+        /*border-top: 2px solid black;*/
+        /*border-bottom: 2px solid black;*/
+        padding: 8px 0 8px 0;
+        margin-bottom: 13px;
+        /*background: linear-gradient(to left, purple 0%,red 50%);
+        -webkit-background-clip:border;
+        -webkit-text-fill-color: transparent;*/
+        -webkit-box-shadow: 0 4px 8px -3px black;
+        -moz-box-shadow: 0 4px 8px -3px black;
+        box-shadow: 0 4px 8px -3px black;
+    }
+
+
+    .detail-button {
+        background: -webkit-linear-gradient(rgba(247, 146, 28), #eee);
+        text-align: center;
+        list-style: none;
+        line-height: 40px;
+        width: 20%;
+        border-radius: 5px;
+        font-size: 1.4em;
+    }
+
+    .first-day {
+        font-size: 1.7em;
+        background: -webkit-linear-gradient(left, #ea0f0f 0%,#d38989 60%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        font-family: 'Roboto Slab', serif;
+        margin-top: 13px;
+    }
+
+    .other-days {
+        font-size: 1.5em;
+        background: -webkit-linear-gradient(left, #e66615 0%,#f3a777 60%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        font-family: 'Roboto Slab', serif;
+        margin-top: 13px;
+    }
+
+    .weather-headline {
+       font-size: 1.7em;
+    }
+
+    h2 {
+        font-family: 'ZCOOL XiaoWei', serif;
+    }
+
+</style>
+
+<h2 style="font-size: 2.5em;">Detail</h2>
+
+<div class="park-details">
+    <div>
+        <img src="~/images/parks/@Model.Path" class="image" />
+    </div>
+
+    <div class="park-info">
+        <div class="name">
+            <span>@Model.ParkName, </span>
+            <span>@Model.State</span>
+        </div>
+        <p class="founded">Founded in @Model.YearFounded</p>
+
+        <div class="quote">
+            <span>@Model.Quote - </span>
+            <span>@Model.QuoteSource</span>
+        </div>
+
+        <div class="description">
+            <p>@Model.Description.</p>
+        </div>
+        <div class="facts-headline-wrap">
+            <div class="facts-headline">
+                <h2>Quick Facts</h2>
+            </div>
+        </div>
+        <div class="more-info">
+            <ul class="details">
+                <li>@Model.Acreage acres</li>
+                <li>@Model.Elevation feet</li>
+                <li>@Model.MilesOfTrail miles</li>
+                <li>@Model.NumberOfCampsites number of campsites</li>
+                <li>@Model.Climate climate</li>
+                <li>@Model.AnnualVisitors visitors per year</li>
+                <li>The entry fee is $@Model.EntryFee</li>
+                <li>@Model.ParkName features @Model.NumberOfAnimalSpecies different species of animals.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="weather-title">
+    <div class="weather-title-h2">
+        <h2 class="weather-headline">Weather Forecast</h2>
+    </div>
+    <div class="weather-title-radio">
+        <form asp-controller="Home" asp-action="Detail" asp-route-parkcode="@Model.ParkCode" method="post">
+            <label for="Fahrenheit">
+                Fahrenheit
+                <input name="tempChoice" type="radio" value="F">
+                <span class="checkmark"></span>
+            </label>
+            <label for="Celsius">
+                Celsius
+                <input name="tempChoice" type="radio" value="C">
+                <span class="checkmark"></span>
+            </label>
+            <div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="tile-container">
+    @{
+        foreach (var item in Model.Weather)
+        {
+            if (item.FiveDayForecastValue == 1)
+            {
+                <div class="tile-weather">
+                    <p class="first-day">Day @item.FiveDayForecastValue</p>
+                    <div class="tile-image">
+                        <img src="~/images/weather/@item.ImageName" alt="test" />
+                    </div>
+                    <div class="tile-info">
+                        <ul class="tile-weather-ul">
+                            <li>High: @item.HighTemp</li>
+                            <li>Low: @item.LowTemp</li>
+                        </ul>
+                        <p class="weather-today-details">@WeatherMessages.GetWeatherMessage(item.Forecast, item.HighTemp, item.LowTemp)</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="tile-weather-small">
+                    <p class="other-days">Day @item.FiveDayForecastValue</p>
+                    <div class="tile-image-small">
+                        <img src="~/images/weather/@item.ImageName" alt="test" />
+                    </div>
+                    <div class="tile-info">
+                        <ul class="tile-weather-small-ul">
+                            <li>High: @item.HighTemp</li>
+                            <li>Low: @item.LowTemp</li>
+                        </ul>
+                    </div>
+                </div>
+                }
+
+            }
+        }
+    </div>
+    
+
+    @*@foreach (WeatherModel forecast in Model.Weather)
+    {
+        <p>@forecast.LowTemp.ToString("#.##")</p>
+    }*@
+
